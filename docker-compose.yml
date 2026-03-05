@@ -1,0 +1,35 @@
+# docker compose -f .agents/codex-sandbox/docker-compose.yml run --rm codex-agent
+
+name: codex-sandbox
+services:
+  codex-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: codex-agent
+    working_dir: /workspace
+
+    # monta o repo como volume
+    volumes:
+      - ../../:/workspace:rw
+      - ./codex-home:/home/codex:rw
+
+    read_only: false
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    # environment:
+    #   - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+    # bloquear internet
+    # network_mode: "none"
