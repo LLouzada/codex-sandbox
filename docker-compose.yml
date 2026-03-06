@@ -1,4 +1,4 @@
-# docker compose run --rm codex-agent
+#
 
 name: codex-sandbox
 services:
@@ -10,7 +10,7 @@ services:
     working_dir: /workspace
     volumes:
       - ${CODEX_HOST_WORKSPACE:-../../}:/workspace:rw
-      - ./codex-home:/home/codex:rw
+      - ${CODEX_HOST_HOME:-./codex-home}:/home/codex/.codex:rw
     read_only: false
     tmpfs:
       - /tmp
