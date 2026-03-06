@@ -33,32 +33,34 @@ cp .env.example .env
 
 2. Configure the workspace path
 
-Set CODEX_HOST_WORKSPACE to the host directory Codex should use.
+- Set CODEX_HOST_WORKSPACE to the host directory Codex should use.
 
-```bash
-CODEX_HOST_WORKSPACE=/path/to/your/repository
-```
+  ```bash
+    CODEX_HOST_WORKSPACE=/path/to/your/repository
+  ```
 
-Default:
+  Default:
 
-```bash
-CODEX_HOST_WORKSPACE=../../
-```
+  ```bash
+  CODEX_HOST_WORKSPACE=../../
+  ```
 
-This default is useful when this repository lives inside a hidden tooling directory such as .agents/, for example:
+  - This default is useful when this repository lives inside a hidden tooling directory such as .agents/, for example:
 
-```plaintext
-your-project/
-├── .agents/
-│   └── codex-sandbox/
-└── ...
-```
+    ```plaintext
+    your-project/
+    ├── .agents/
+    │   └── codex-sandbox/
+    └── ...
+    ```
 
 ---
 
-## Running Codex
+## Running the sandbox
 
-### Normal mode
+### Option 1: Docker Compose
+
+#### Normal mode
 
 Runs Codex with normal container networking enabled:
 
@@ -66,10 +68,16 @@ Runs Codex with normal container networking enabled:
 docker compose run --rm codex-agent
 ```
 
-### Offline mode
+#### Offline mode
 
 Runs Codex with networking disabled:
 
 ```bash
 docker compose run --rm codex-agent-offline
+```
+
+### Option 2: Docker Hub Image
+
+```bash
+docker run --rm -it -v /path/to/your/repos:/workspace -v /path/to/codex-home/codex-home:/home/ -w /workspace llouzada01/codex-sandbox-workspace:latest
 ```
