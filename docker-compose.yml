@@ -9,7 +9,7 @@ services:
     container_name: codex-agent
     working_dir: /workspace
     volumes:
-      - ${CODEX_REPO_HOST:-../../}:/workspace:rw
+      - ${CODEX_HOST_WORKSPACE:-../../}:/workspace:rw
       - ./codex-home:/home/codex:rw
     read_only: false
     tmpfs:

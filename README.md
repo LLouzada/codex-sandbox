@@ -10,11 +10,11 @@ Ready to use codex in a sandbox environment.
   cp .env.example .env
   ```
 
-- Set the path where the codex repo is cloned
+- Set the path to the workspace where codex will work
   - Defaults to `../../`, which is ideal to put codex-sandbox in `.agents/` directory.
 
   ```
-  CODEX_REPO_HOST=/path/to/codex/repo
+  CODEX_HOST_WORKSPACE=/path/to/codex/repo
   ```
 
 # Run codex sandbox
