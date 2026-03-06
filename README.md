@@ -1,22 +1,75 @@
 # Codex Sandbox
 
-Ready to use codex in a sandbox environment.
+A minimal Docker-based sandbox to run `@openai/codex` in an isolated container while working on a repository from your host machine.
 
-# Setup codex sandbox
+---
 
-- Copy `.env`
+## What this provides
 
-  ```
-  cp .env.example .env
-  ```
+- A reusable Docker container for running Codex
+- A mounted workspace from the host machine into `/workspace`
+- A persistent home directory for the `codex` user (`./codex-home`)
+- An optional offline profile with networking disabled
 
-- Set the path to the workspace where codex will work
-  - Defaults to `../../`, which is ideal to put codex-sandbox in `.agents/` directory.
+---
 
-  ```
-  CODEX_HOST_WORKSPACE=/path/to/codex/repo
-  ```
+## Requirements
 
-# Run codex sandbox
+Before using this project, make sure you have:
 
+- Docker installed
+- Docker Compose available (docker compose)
+- A repository or workspace on the host machine that Codex should access
+
+---
+
+## Setup
+
+1. Copy the environment file
+
+```bash
+cp .env.example .env
+```
+
+2. Configure the workspace path
+
+Set CODEX_HOST_WORKSPACE to the host directory Codex should use.
+
+```bash
+CODEX_HOST_WORKSPACE=/path/to/your/repository
+```
+
+Default:
+
+```bash
+CODEX_HOST_WORKSPACE=../../
+```
+
+This default is useful when this repository lives inside a hidden tooling directory such as .agents/, for example:
+
+```plaintext
+your-project/
+├── .agents/
+│   └── codex-sandbox/
+└── ...
+```
+
+---
+
+## Running Codex
+
+### Normal mode
+
+Runs Codex with normal container networking enabled:
+
+```bash
 docker compose run --rm codex-agent
+```
+
+### Offline mode
+
+Runs Codex with networking disabled:
+
+```bash
+docker compose run --rm codex-agent-offline
+```
