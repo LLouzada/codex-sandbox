@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # RUN npm i -g npm@latest
 
-RUN npm i -g @openai/codex
+RUN npm i -g @openai/codex@latest
 
 RUN useradd -m -u 1000 codex
 USER codex
