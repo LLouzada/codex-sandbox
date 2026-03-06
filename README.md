@@ -92,5 +92,5 @@ docker compose run --rm codex-agent-offline
 ### Option 2: Docker Hub Image
 
 ```bash
-docker run --rm -it -v /path/to/your/repos:/workspace -v /path/to/codex-home:/home/codex/.codex -w /workspace llouzada01/codex-sandbox-workspace:latest
+docker run --rm -it -v /path/to/your/repos:/workspace -v /path/to/codex-home:/home/codex/.codex llouzada01/codex-sandbox-workspace:latest
 ```
