@@ -54,6 +54,19 @@ cp .env.example .env
     └── ...
     ```
 
+- Set CODEX_HOST_HOME to the host directory Codex should use for its configuration directory. This is where cadox stores its cacche, auth and other data.
+  - You can set this to your `~/.codex` directory, for example:
+
+    ```bash
+    CODEX_HOST_HOME=~/.codex
+    ```
+
+  Default:
+
+  ```bash
+  CODEX_HOST_HOME=./codex-home
+  ```
+
 ---
 
 ## Running the sandbox
