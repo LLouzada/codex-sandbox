@@ -8,7 +8,7 @@ A minimal Docker-based sandbox to run `@openai/codex` in an isolated container w
 
 - A reusable Docker container for running Codex
 - A mounted workspace from the host machine into `/workspace`
-- A persistent home directory for the `codex` user (`./codex-home`)
+- A persistent `.codex` directory for storing Codex data
 - An optional offline profile with networking disabled
 
 ---
@@ -33,16 +33,16 @@ cp .env.example .env
 
 2. Configure the workspace path
 
-- Set CODEX_HOST_WORKSPACE to the host directory Codex should use.
+- Set CODEX_HOST_WORKSPACE_DIR to the host directory Codex should use as its workspace directory. Here, you can set this to your repository directory, for example:
 
   ```bash
-    CODEX_HOST_WORKSPACE=/path/to/your/repository
+    CODEX_HOST_WORKSPACE_DIR=/path/to/your/repository
   ```
 
   Default:
 
   ```bash
-  CODEX_HOST_WORKSPACE=../../
+  CODEX_HOST_WORKSPACE_DIR=../../
   ```
 
   - This default is useful when this repository lives inside a hidden tooling directory such as .agents/, for example:
@@ -54,22 +54,21 @@ cp .env.example .env
     └── ...
     ```
 
-- Set CODEX_HOST_HOME to the host directory Codex should use for its configuration directory. This is where cadox stores its cacche, auth and other data.
-  - You can set this to your `~/.codex` directory, for example:
+- Set CODEX_HOST_CONFIG_DIR to the host directory Codex should use for its configuration directory. This is where cadox stores its cache, auth and other data. You can set this to your `~/.codex` directory, for example:
 
-    ```bash
-    CODEX_HOST_HOME=~/.codex
-    ```
+  ```bash
+  CODEX_HOST_CONFIG_DIR=~/.codex
+  ```
 
   Default:
 
   ```bash
-  CODEX_HOST_HOME=./codex-home
+  CODEX_HOST_CONFIG_DIR=./.codex
   ```
 
 ---
 
-## Running the sandbox
+## Running
 
 ### Option 1: Docker Compose
 
@@ -92,5 +91,5 @@ docker compose run --rm codex-agent-offline
 ### Option 2: Docker Hub Image
 
 ```bash
-docker run --rm -it -v /path/to/your/repos:/workspace -v /path/to/codex-home:/home/codex/.codex llouzada01/codex-sandbox-workspace:latest
+docker run --rm -it -v /path/to/your/repos:/workspace -v /path/to/.codex:/home/codex/.codex llouzada01/codex-sandbox-workspace:latest
 ```
